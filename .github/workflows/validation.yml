@@ -32,13 +32,13 @@ jobs:
       run: terraform fmt -recursive -check
 
     - name: Dev Terraform init
-      working-directory: ./environments/dev 
+      working-directory: ./env/dev 
       run: |
         terraform init
         terraform validate
 
     - name: Dev Terraform Plan
-      working-directory: ./environments/dev
+      working-directory: ./env/dev
       id: dev_plan
       run: terraform plan -no-color
 
