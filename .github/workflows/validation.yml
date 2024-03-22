@@ -55,7 +55,7 @@ jobs:
           <details><summary>Dev Show Plan</summary>
 
           \`\`\`\n
-          ${process.env.DEV_PLAN}
+          ${process.env.Dev_PLAN}
           \`\`\`
 
           </details>
