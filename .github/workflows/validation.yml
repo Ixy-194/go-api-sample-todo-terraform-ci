@@ -31,14 +31,14 @@ jobs:
     - name: Terraform Format
       run: terraform fmt -recursive -check
 
-    - name: RC Terraform init
-      working-directory: ./environments/rc
+    - name: Dev Terraform init
+      working-directory: ./environments/dev 
       run: |
         terraform init
         terraform validate
 
-    - name: DEV Terraform Plan
-      working-directory: ./environments/rc
+    - name: Dev Terraform Plan
+      working-directory: ./environments/dev
       id: dev_plan
       run: terraform plan -no-color
 
@@ -46,13 +46,13 @@ jobs:
       uses: actions/github-script@v5
       if: github.event_name == 'pull_request'
       env:
-        Dev_PLAN: "terraform\n${{ steps.rc_plan.outputs.stdout }}"
+        Dev_PLAN: "terraform\n${{ steps.dev_plan.outputs.stdout }}"
       with:
         result-encoding: string
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           const output = `#### Check! Terraform Show Plans 🖌\`
-          <details><summary>DEV Show Plan</summary>
+          <details><summary>Dev Show Plan</summary>
 
           \`\`\`\n
           ${process.env.DEV_PLAN}
